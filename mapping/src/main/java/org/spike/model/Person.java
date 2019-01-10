@@ -1,8 +1,21 @@
 package org.spike.model;
 
 public class Person {
+
     private String name;
     private String firstName;
+    private String city;
+    private int age;
+
+    public Person() {
+    }
+
+    public Person(String firstName, String name, String city, int age) {
+        this.name = name;
+        this.firstName = firstName;
+        this.city = city;
+        this.age = age;
+    }
 
     public String getCity() {
         return city;
@@ -11,9 +24,6 @@ public class Person {
     public void setCity(String city) {
         this.city = city;
     }
-
-    private String city;
-    private int age;
 
     public String getName() {
         return name;

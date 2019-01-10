@@ -3,6 +3,12 @@ package org.spike.mapper;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
+/**
+ * Class that apply a setter with the return value of a getter.
+ * @param <G> Class of the getter.
+ * @param <S> Class of the setter.
+ * @param <T> Type of the value to transfert.
+ */
 public class Mapper<G, S, T> {
     public final BiConsumer<S, T> set;
     public final Function<G, T> get;

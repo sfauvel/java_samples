@@ -3,6 +3,18 @@ package org.spike.model;
 public class PersonDao {
     private String nm;
     private String fn;
+    private String ci;
+    private int a;
+
+    public PersonDao() {
+    }
+
+    public PersonDao(String nm, String fn, String ci, int a) {
+        this.nm = nm;
+        this.fn = fn;
+        this.ci = ci;
+        this.a = a;
+    }
 
     public String getCi() {
         return ci;
@@ -11,9 +23,6 @@ public class PersonDao {
     public void setCi(String ci) {
         this.ci = ci;
     }
-
-    private String ci;
-    private int a;
 
     public String getNm() {
         return nm;
