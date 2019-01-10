@@ -1,2 +1,6 @@
 
 = Java simple project
+
+== Projects list
+
+* link:mapping/README.adoc[Mapping]: Mapping between 2 objects.
