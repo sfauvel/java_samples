@@ -6,6 +6,7 @@ import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.spike.mapper.Mapper;
+import org.spike.mapper.MapperPredicate;
 import org.spike.model.Person;
 import org.spike.model.PersonDao;
 
@@ -14,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.spike.mapper.Mapper.mapGeneric;
 import static org.spike.mapper.MapperPredicate.NotNull;
@@ -44,6 +46,39 @@ public class GenerateMapperDocumentationTest {
                 "getA -> setAge"
         )));
 
+    }
+
+
+    @Test
+    public void should_return_getter_not_matching_predicate() throws Exception {
+
+        List<MapperPredicate> mappers = Arrays.asList(
+                //mapGeneric(attribut, /***/with, /***/when),
+                mapGeneric(Person::setName, /********/PersonDao::getNm, /***/NotNull),
+                mapGeneric(Person::setFirstName, /***/PersonDao::getFn, /***/NotNull),
+                mapGeneric(Person::setCity, /********/PersonDao::getCi, /***/NotNull),
+                mapGeneric(Person::setAge, /*********/PersonDao::getA, /****/age -> age != -1)
+        );
+
+        PersonDao dao = new PersonDao("Moran", "Bob", null, -1);
+
+        List<String> unvalidField = recordUnvalidField(mappers, dao);
+
+        assertEquals(2, unvalidField.size());
+        assertTrue(unvalidField.containsAll(Arrays.asList(
+                "getCi",
+                "getA"
+        )));
+
+    }
+
+    private List<String> recordUnvalidField(List<MapperPredicate> mappers, PersonDao dao) {
+        MethodCallRecorder callRecorder = new MethodCallRecorder();
+        PersonDao mockDao = Mockito.mock(PersonDao.class, callRecorder);
+        mappers.stream()
+            .filter(m -> !m.isValid(dao))
+            .forEach(m -> m.get.apply(mockDao));
+        return callRecorder.messages;
     }
 
     /**

@@ -18,13 +18,18 @@ public class MapperPredicate<G, S, T> extends Mapper<G, S, T> {
         this.predicat = predicat;
     }
 
+
     public void apply(S setterObject, G getterObject) {
-        if (predicat.test(get.apply(getterObject))) {
+        if (isValid(getterObject)) {
             super.apply(setterObject, getterObject);
         }
     }
 
-    public static <G, S, T> Mapper<G, S, T> mapGeneric(BiConsumer<S, T> set, Function<G, T> get, Predicate<T> p) {
+    public boolean isValid(G getterObject) {
+        return predicat.test(get.apply(getterObject));
+    }
+
+    public static <G, S, T> MapperPredicate<G, S, T> mapGeneric(BiConsumer<S, T> set, Function<G, T> get, Predicate<T> p) {
         return new MapperPredicate<G, S, T>(set, get, p);
     }
 
