@@ -1,0 +1,14 @@
+= Anemic model vs Rich model
+
+Inspired by: https://web-techno.net/anemic-domain-model/
+
+CheckoutService can complete an order.
+The order should be validate and a shipment created with products that must decrease from stock.
+
+
+The anemic model need to have getters and setters for every fields and then, break encapsulation.
+Everyone using those objects can modify it without control.
+
+Objects in rich model garanty the object coherence.
+In anemic model, this coherence is delegated to the service but it's allow to manipulate object
+without using service.
