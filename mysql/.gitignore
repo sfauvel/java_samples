@@ -1,0 +1,24 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# eclipse project
+**/.classpath
+**/.project
+**/.settings
+**/target
+
+# intellij
+**/.idea
+*.iml
