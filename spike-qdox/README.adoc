@@ -1,0 +1,14 @@
+= QDox Sample usage
+
+== Introduction
+
+QDox is a high speed, small footprint parser for fully extracting class/interface/method definitions (including annotations, parameters, param names).
+It is designed to be used by active code generators or documentation tools.
+
+link:https://github.com/paul-hammant/qdox[]
+
+== Content
+
+Show usage to parse a directory and display some information.
+
+Run GenerateDoc to display Person information.
