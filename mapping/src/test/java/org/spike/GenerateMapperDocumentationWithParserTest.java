@@ -5,20 +5,11 @@ import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
-import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
-import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.visitor.GenericVisitorWithDefaults;
-import com.github.javaparser.ast.visitor.VoidVisitor;
-import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.ast.visitor.VoidVisitorWithDefaults;
-import com.github.javaparser.printer.PrettyPrinterConfiguration;
 import org.junit.Test;
-import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import org.spike.mapper.Mapper;
 import org.spike.mapper.MapperPredicate;
 import org.spike.model.Person;
 import org.spike.model.PersonDao;
@@ -32,10 +23,13 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.spike.mapper.Mapper.mapGeneric;
 import static org.spike.mapper.MapperPredicate.NotNull;
 import static org.spike.mapper.MapperPredicate.mapGeneric;
 
+/**
+ * Generate mapping documentation using a parser.
+ *
+ */
 public class GenerateMapperDocumentationWithParserTest {
 
     @Test

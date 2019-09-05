@@ -3,21 +3,15 @@ package org.spike;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import org.spike.mapper.Mapper;
+import org.spike.mapper.AttributMapper;
 import org.spike.model.Person;
 import org.spike.model.PersonDao;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.*;
-import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertTrue;
-import static org.spike.mapper.Mapper.mapGeneric;
+import static org.spike.mapper.AttributMapper.mapGeneric;
 import static org.spike.mapper.MapperPredicate.NotNull;
 import static org.spike.mapper.MapperPredicate.mapGeneric;
 
@@ -26,7 +20,7 @@ public class MapperTest {
     @Test
     public void should_map_with_a_generic_mapper() throws Exception {
 
-        List<Mapper> mappers = Arrays.asList(
+        List<AttributMapper> mappers = Arrays.asList(
                 mapGeneric(Person::setFirstName, PersonDao::getFn),
                 mapGeneric(Person::setAge, PersonDao::getA),
                 mapGeneric(Person::setName, (PersonDao it) -> it.getFn() + " " + it.getNm()));
@@ -40,10 +34,28 @@ public class MapperTest {
         Assert.assertEquals("Bob Moran", person.getName());
     }
 
+
+    @Test
+    public void should_not_map_when_condition_is_not_valid() throws Exception {
+
+        List<AttributMapper> mappers = Arrays.asList(
+                mapGeneric(Person::setFirstName, PersonDao::getFn, NotNull),
+                mapGeneric(Person::setName, PersonDao::getNm));
+
+        PersonDao dao = new PersonDao("Moran", null, null, 25);
+        Person person = new Person("?", "?", "?", 0);
+
+        mappers.forEach(m -> m.apply(person, dao));
+
+        Assert.assertEquals("Moran", person.getName());
+        Assert.assertEquals("?", person.getFirstName());
+    }
+
+
     @Test
     public void should_map_with_predicates() throws Exception {
 
-        List<Mapper> mappers = Arrays.asList(
+        List<AttributMapper> mappers = Arrays.asList(
                 //mapGeneric(attribut, /***/with, /***/when),
                 mapGeneric(Person::setFirstName, /***/PersonDao::getFn, /***/NotNull),
                 mapGeneric(Person::setName, /********/PersonDao::getNm  /***/),

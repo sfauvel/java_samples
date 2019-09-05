@@ -9,11 +9,11 @@ import java.util.function.Function;
  * @param <S> Class of the setter.
  * @param <T> Type of the value to transfert.
  */
-public class Mapper<G, S, T> {
+public class AttributMapper<G, S, T> {
     public final BiConsumer<S, T> set;
     public final Function<G, T> get;
 
-    public Mapper(BiConsumer<S, T> set, Function<G, T> get) {
+    public AttributMapper(BiConsumer<S, T> set, Function<G, T> get) {
         this.set = set;
         this.get = get;
     }
@@ -22,7 +22,7 @@ public class Mapper<G, S, T> {
         set.accept(setterObject, get.apply(getterObject));
     }
 
-    public static <G, S, T> Mapper<G, S, T> mapGeneric(BiConsumer<S, T> set, Function<G, T> get) {
-        return new Mapper<G, S, T>(set, get);
+    public static <G, S, T> AttributMapper<G, S, T> mapGeneric(BiConsumer<S, T> set, Function<G, T> get) {
+        return new AttributMapper<G, S, T>(set, get);
     }
 }

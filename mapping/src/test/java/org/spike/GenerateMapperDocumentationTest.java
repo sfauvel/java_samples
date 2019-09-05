@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.spike.mapper.Mapper;
+import org.spike.mapper.AttributMapper;
 import org.spike.mapper.MapperPredicate;
 import org.spike.model.Person;
 import org.spike.model.PersonDao;
@@ -13,21 +13,30 @@ import org.spike.model.PersonDao;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.spike.mapper.Mapper.mapGeneric;
+import static org.spike.mapper.AttributMapper.mapGeneric;
 import static org.spike.mapper.MapperPredicate.NotNull;
 import static org.spike.mapper.MapperPredicate.mapGeneric;
 
+/**
+ * Generate mapping documentation calling getter and setter on object mocked with Mockito.
+ *
+ */
 public class GenerateMapperDocumentationTest {
+
+
 
     @Test
     public void should_return_method_name_from_mapping() throws Exception {
 
-        List<Mapper> mappers = Arrays.asList(
-                //mapGeneric(attribut, /***/with, /***/when),
+        List<AttributMapper> mappers = Arrays.asList(
+                //mapGeneric(attribut,           /***/with,             /***/when),
                 mapGeneric(Person::setFirstName, /***/PersonDao::getFn, /***/NotNull),
                 mapGeneric(Person::setName, /********/PersonDao::getNm  /***/),
                 mapGeneric(Person::setCity, /********/PersonDao::getCi, /***/NotNull),
@@ -72,6 +81,12 @@ public class GenerateMapperDocumentationTest {
 
     }
 
+    /**
+     * Record all field mapped and which is invalid according to validation method.
+     * @param mappers
+     * @param dao
+     * @return
+     */
     private List<String> recordUnvalidField(List<MapperPredicate> mappers, PersonDao dao) {
         MethodCallRecorder callRecorder = new MethodCallRecorder();
         PersonDao mockDao = Mockito.mock(PersonDao.class, callRecorder);
@@ -86,7 +101,7 @@ public class GenerateMapperDocumentationTest {
      * @param mapper
      * @return
      */
-    private String recordGetterSetter(Mapper mapper) {
+    private String recordGetterSetter(AttributMapper mapper) {
         MethodCallRecorder callRecorder = new MethodCallRecorder();
         PersonDao mockDao = Mockito.mock(PersonDao.class, callRecorder);
         Person mockPerson = Mockito.mock(Person.class, callRecorder);
@@ -102,6 +117,9 @@ public class GenerateMapperDocumentationTest {
         return callRecorder.call(0) + " -> " + callRecorder.call(1);
     }
 
+    /**
+     * Answer that record method name called.
+     */
     private static class MethodCallRecorder implements Answer {
         private final List<String> messages = new ArrayList<>();
 

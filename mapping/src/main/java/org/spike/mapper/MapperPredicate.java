@@ -10,7 +10,7 @@ import java.util.function.Predicate;
  * @param <S>
  * @param <T>
  */
-public class MapperPredicate<G, S, T> extends Mapper<G, S, T> {
+public class MapperPredicate<G, S, T> extends AttributMapper<G, S, T> {
     private final Predicate<T> predicat;
 
     public MapperPredicate(BiConsumer<S, T> set, Function<G, T> get, Predicate<T> predicat) {
