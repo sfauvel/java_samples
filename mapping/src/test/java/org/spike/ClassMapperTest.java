@@ -24,8 +24,7 @@ public class ClassMapperTest {
     public void should_map_attributs_with_different_types() throws Exception {
         ClassMapper mapper = ClassMapper.init()
                 .with(Person::setFirstName, PersonDao::getFn)
-                .with(Person::setAge, PersonDao::getA)
-                .with(ClassMapperTest::setAge, PersonDao::getA);
+                .with(Person::setAge, PersonDao::getA);
 
 
         mapper.apply(person, dao);
