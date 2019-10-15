@@ -3,11 +3,7 @@ package org.spike.mockito.initialization;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.spike.mockito.Dao;
-import org.spike.mockito.Service;
 
 import java.util.logging.Logger;
 

@@ -15,15 +15,21 @@ import java.util.stream.Collectors;
 
 /**
  * Mockito extension to init fields without recreate them.
+ *
+ * Mockito has a method to init mocks using annotation calling: MockitoAnnotations.initMocks(testClass);
+ * see: https://static.javadoc.io/org.mockito/mockito-core/3.1.0/org/mockito/Mockito.html#mock_annotation
+ *
+ * MockitoAnnotationExtended change this method initMocks to create mocks only if they are not already existed.
+ * It's now possible to initiate our own mock and inject it.
  */
 public class MockitoAnnotationExtended {
 
-    public static  void initMocks(Object objectWithAnnotations)  {
+    public static void initMocks(Object objectWithAnnotations)  {
         new MockitoAnnotationExtended().init(objectWithAnnotations, Mockito.withSettings());
     }
 
 
-    public static  void initMocks(Object objectWithAnnotations, MockSettings mockSettings)  {
+    public static void initMocks(Object objectWithAnnotations, MockSettings mockSettings)  {
         new MockitoAnnotationExtended().init(objectWithAnnotations, mockSettings);
     }
 

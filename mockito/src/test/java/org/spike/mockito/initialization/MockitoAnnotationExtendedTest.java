@@ -8,12 +8,11 @@ import org.mockito.Mockito;
 import org.mockito.internal.debugging.VerboseMockInvocationLogger;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.spike.mockito.Dao;
 import org.spike.mockito.MockitoAnnotationExtended;
-import org.spike.mockito.Service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -94,6 +93,33 @@ public class MockitoAnnotationExtendedTest {
 
         service.getDao().findById(4);
 
-        assertTrue(out.toString().isBlank());
+        assertTrue(out.toString().isEmpty());
+    }
+
+    @Test
+    public void should_inject_mock_that_is_an_anonymous_class() throws IllegalAccessException {
+        service = new Service();
+        dao = new Dao() {
+
+            @Override
+            public String getId() {
+                return "Anonymous DAO";
+            }
+
+            @Override
+            public List<Object> findAll() {
+                return null;
+            }
+
+            @Override
+            public Object findById(long id) {
+                return null;
+            }
+        };
+
+        MockitoAnnotationExtended.initMocks(this);
+
+        assertEquals("Anonymous DAO", service.getDao().getId());
+
     }
 }

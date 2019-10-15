@@ -1,4 +1,4 @@
-package org.spike.mockito;
+package org.spike.mockito.initialization;
 
 import java.util.List;
 

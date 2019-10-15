@@ -4,3 +4,4 @@
 == Projects list
 
 * link:mapping/README.adoc[Mapping]: Mapping between 2 objects.
+* link:mockito/README.adoc[Mockito extension]: Init mocks already instantiated.
