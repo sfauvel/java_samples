@@ -1,0 +1,12 @@
+= Get Method Reference Name
+:description: Retrieve method reference name pass to a method as a lambda.
+
+== Description
+
+{description}
+
+== Resources
+
+* https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html#jls-15.16
+* https://stackoverflow.com/questions/22807912/how-to-serialize-a-lambda
+* https://stackoverflow.com/questions/51070344/strange-java-cast-syntax-using
