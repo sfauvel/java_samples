@@ -1,7 +1,13 @@
 
 = Java simple project
 
+== Description
+
+This repository is composed with projects that show a specific technics.
+It could be a library usage, design consideration, good practices, ....
+
 == Projects list
 
 * link:mapping/README.adoc[Mapping]: Mapping between 2 objects.
-* link:mockito/README.adoc[Mockito extension]: Init mocks already instantiated.
+* link:mockito/README.adoc[Mockito extension]: To init mocks already instantiated.
+* link:replace-code/README.adoc[Replace code]: Make structural refactoring programmatically.
