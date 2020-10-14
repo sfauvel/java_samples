@@ -22,5 +22,3 @@
 # intellij
 **/.idea
 *.iml
-
-src/main/java/spike/generated
