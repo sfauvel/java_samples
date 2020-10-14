@@ -16,8 +16,6 @@ public class BadDesign {
         return tension / current;
     }
 
-
-
     // If we want to use a different Ammeter.
     boolean useTeslaWasBetterThanEdison = true;
 
