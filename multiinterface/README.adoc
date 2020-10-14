@@ -1,0 +1,7 @@
+= Multi interface
+
+How to add select only some functionalites for an object without reimplementing all methods.
+
+I want to select which methods are available.
+It's a delegation without reimplementing all methods to delegate.
+We define those delegation in interface and add it to the final object.
